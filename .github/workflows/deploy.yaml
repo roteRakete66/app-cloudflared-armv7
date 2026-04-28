@@ -101,15 +101,15 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GH_TOKEN }}
       - name: 🚀 Build
         uses: docker/build-push-action@v6.18.0
         with:
           load: true
           # yamllint disable rule:line-length
           tags: |
-            ghcr.io/${{ github.repository_owner }}/${{ needs.information.outputs.slug }}/${{ matrix.architecture }}:${{ needs.information.outputs.environment }}
-            ghcr.io/${{ github.repository_owner }}/${{ needs.information.outputs.slug }}/${{ matrix.architecture }}:${{ needs.information.outputs.version }}
+            ghcr.io/${{ secrets.GH_USER }}/${{ needs.information.outputs.slug }}/${{ matrix.architecture }}:${{ needs.information.outputs.environment }}
+            ghcr.io/${{ secrets.GH_USER }}/${{ needs.information.outputs.slug }}/${{ matrix.architecture }}:${{ needs.information.outputs.version }}
           # yamllint enable rule:line-length
           context: ${{ needs.information.outputs.target }}
           file: ${{ needs.information.outputs.target }}/Dockerfile
@@ -128,54 +128,6 @@ jobs:
       - name: 🚀 Push
         run: |
           docker push \
-            "ghcr.io/${{ github.repository_owner }}/${{ needs.information.outputs.slug }}/${{ matrix.architecture }}:${{ needs.information.outputs.environment }}"
+            "ghcr.io/${{ secrets.GH_USER }}/${{ needs.information.outputs.slug }}/${{ matrix.architecture }}:${{ needs.information.outputs.environment }}"
           docker push \
-            "ghcr.io/${{ github.repository_owner }}/${{ needs.information.outputs.slug }}/${{ matrix.architecture }}:${{ needs.information.outputs.version }}"
-      # yamllint enable rule:line-length
-  publish-edge:
-    name: 📢 Publish to edge repository
-    if: needs.information.outputs.environment == 'edge'
-    needs:
-      - information
-      - deploy
-    environment:
-      name: ${{ needs.information.outputs.environment }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: 🚀 Dispatch repository updater update signal
-        uses: peter-evans/repository-dispatch@v4
-        with:
-          token: ${{ secrets.DISPATCH_TOKEN }}
-          repository: ${{ github.repository_owner }}/ha-addons-edge
-          event-type: update
-          client-payload: >
-            {
-              "addon": "${{ needs.information.outputs.slug }}",
-              "name": "${{ needs.information.outputs.name }}",
-              "repository": "${{ github.repository }}",
-              "version": "${{ needs.information.outputs.version }}"
-            }
-
-  publish-stable:
-    name: 📢 Publish to stable repository
-    if: needs.information.outputs.environment == 'stable'
-    needs:
-      - information
-      - deploy
-    environment:
-      name: ${{ needs.information.outputs.environment }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: 🚀 Dispatch repository updater update signal
-        uses: peter-evans/repository-dispatch@v4
-        with:
-          token: ${{ secrets.DISPATCH_TOKEN }}
-          repository: ${{ github.repository_owner }}/ha-addons
-          event-type: update
-          client-payload: >
-            {
-              "addon": "${{ needs.information.outputs.slug }}",
-              "name": "${{ needs.information.outputs.name }}",
-              "repository": "${{ github.repository }}",
-              "version": "${{ github.event.release.tag_name }}"
-            }
+            "ghcr.io/${{ secrets.GH_USER }}/${{ needs.information.outputs.slug }}/${{ matrix.architecture }}:${{ needs.information.outputs.version }}"
