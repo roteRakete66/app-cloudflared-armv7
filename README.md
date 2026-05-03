@@ -97,7 +97,7 @@ SOFTWARE.
 [domainarticle]: https://www.linkedin.com/pulse/what-do-domain-name-how-get-one-free-tobias-brenner?trk=public_post-content_share-article
 [github-actions-shield]: https://github.com/brenner-tobias/addon-cloudflared/workflows/CI/badge.svg
 [github-actions]: https://github.com/brenner-tobias/addon-cloudflared//actions
-[ha-addons]: https://github.com/brenner-tobias/ha-addons
+[ha-addons]: https://github.com/roteRakete66/app-cloudflared-armv7
 [i386-shield]: https://img.shields.io/badge/i386-no-red.svg
 [issue]: https://github.com/brenner-tobias/addon-cloudflared/issues
 [license-shield]: https://img.shields.io/github/license/brenner-tobias/addon-cloudflared
@@ -107,6 +107,6 @@ SOFTWARE.
 [releases]: https://github.com/brenner-tobias/addon-cloudflared/releases
 [tobias]: https://github.com/brenner-tobias
 [my-ha-badge]: https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg
-[my-ha-url]: https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fbrenner-tobias%2Fha-addons
+[my-ha-url]: https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FroteRakete66%2Fapp-cloudflared-armv7
 [wiki]: https://github.com/brenner-tobias/addon-cloudflared/wiki/How-tos
 [installations-shield-stable]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fanalytics.home-assistant.io%2Faddons.json&query=%24%5B%229074a9fa_cloudflared%22%5D.total&label=Reported%20Installations&link=https%3A%2F%2Fanalytics.home-assistant.io/add-ons
